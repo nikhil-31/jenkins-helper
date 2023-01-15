@@ -45,7 +45,7 @@ pipeline {
         stage("deploy") {
             steps {
                 echo "Deploying the fake image"
-                withCredentials(usernamePassword(credentaialsId: 'dockerhub'), usernameVariable: USER, passwordVariable: PWD) {
+                withCredentials([usernamePassword(credentaialsId: 'dockerhub'), usernameVariable: 'USER', passwordVariable: 'PWD' ]) {
                     sh "some script ${USER} , password ${PWD}"
                 }
                 echo "Deploying version ${params.VERSION}"
