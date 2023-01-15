@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    tools {
-        // maven 'Maven'
-    }
     parameters {
         string(name: 'VERSION', defaultValue: '', description: 'version to deploy on Prod')
         choice(name: 'VERSION', choices: ['1.1.0', '1.2.0', '1.3.0'] , description: '')
@@ -48,7 +45,7 @@ pipeline {
         stage("deploy") {
             steps {
                 echo "Deploying the fake image"
-                withCredentials(usernamePassword(credentaials: 'dockerhub'), usernameVariable: USER, passwordVariable: PWD) {
+                withCredentials(usernamePassword(credentaialsId: 'dockerhub'), usernameVariable: USER, passwordVariable: PWD) {
                     sh "some script ${USER} , password ${PWD}"
                 }
                 echo "Deploying version ${params.VERSION}"
