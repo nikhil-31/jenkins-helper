@@ -11,9 +11,7 @@ pipeline {
         stage("Test image") {
             agent any
             steps {
-                script {
-                    sh "echo "Testing the stupid image" "
-                }
+                echo "Testing the stupid image" 
             }
         }
         stage("deploy") {
