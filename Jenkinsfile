@@ -13,6 +13,7 @@ pipeline {
         SERVER_CREDENTIALS = credentials('dockerhub')
     }
     stages {
+        
         stage("init") {
             steps {
                 script {
@@ -30,6 +31,7 @@ pipeline {
                 }
             }
         }
+
         stage("Test image") {
             when {
                 expression {
@@ -42,6 +44,7 @@ pipeline {
                 echo "Building version ${NEW_VERSION}" 
             }
         }
+        
         stage("deploy") {
             steps {
                 echo "Deploying the fake image"
@@ -53,8 +56,13 @@ pipeline {
         }
 
         stage("groovy script"){
-
+            steps {
+                script {
+                    gv.hello_scriptor()
+                }
+            }
         }
+
     }
     post {
         always {
