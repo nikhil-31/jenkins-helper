@@ -66,8 +66,9 @@ pipeline {
     }
     post {
         always {
-        }
-        failure {
+            steps{
+                echo "toodles"
+            }
         }
     }
 }  
