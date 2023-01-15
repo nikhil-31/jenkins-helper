@@ -32,7 +32,7 @@ pipeline {
         }
         stage("Test image") {
             when {
-                expressions {
+                expression {
                     env.BRANCH_NAME == 'dev' || env.BRANCH_NAME == 'master'
                     params.executeTest == true
                 }
