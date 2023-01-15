@@ -5,21 +5,21 @@ pipeline {
         stage("Build Image") {
             agent any
             steps {
-                echo "Build Image"
+                echo "Building the damn image"
             }
         }
         stage("Test image") {
             agent any
             steps {
                 script {
-                    sh "echo "Test image""
+                    sh "echo "Testing the stupid image" "
                 }
             }
         }
-        stage("deploy image") {
+        stage("deploy") {
             agent any
             steps {
-                echo "Deploy image"
+                echo "Deploying the fake image"
             }
         }
     }
