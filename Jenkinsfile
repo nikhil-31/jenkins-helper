@@ -45,10 +45,10 @@ pipeline {
         stage("deploy") {
             steps {
                 echo "Deploying the fake image"
-                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                    sh "sudo docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                    sh 'sudo docker push nikhilsuper/django-polls:latest'
-                }
+                // withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                //     sh "sudo docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                //     sh 'sudo docker push nikhilsuper/django-polls:latest'
+                // }
                 echo "Deploying version ${params.VERSION}"
             }
         }
@@ -64,9 +64,7 @@ pipeline {
     }
     post {
         always {
-            steps{
-                echo "toodles"
-            }
+            echo "toodles"
         }
     }
 }  
