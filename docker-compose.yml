@@ -1,0 +1,22 @@
+version: '3'
+services:
+  nginx:
+    container_name: nginx-jenkins 
+    image: nginx:1.20-alpine
+    volumes:
+      - /home/docker/nginx/conf.d:/etc/nginx/conf.d
+      - /home/docker/log/nginx:/var/log/nginx
+      - /home/docker/log/nginx/jenkins:/var/log/nginx/jenkins
+    restart: always
+    environment:
+      TZ: Asia/Jakarta
+  jenkins:
+    depends_on:
+      - nginx
+    container_name: jenkins
+    image: jenkins/jenkins:lts-jdk11 
+    restart: always
+    environment:
+      TZ: Asia/Jakarta
+    volumes:
+      - /home/docker/jenkins_home:/var/jenkins_home
