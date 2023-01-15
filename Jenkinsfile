@@ -45,8 +45,9 @@ pipeline {
         stage("deploy") {
             steps {
                 echo "Deploying the fake image"
-                withCredentials([usernamePassword(credentaialsId: 'dockerhub'), usernameVariable: 'USER', passwordVariable: 'PWD' ]) {
-                    sh "some script ${USER} , password ${PWD}"
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                    sh "sudo docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                    sh 'sudo docker push nikhilsuper/django-polls:latest'
                 }
                 echo "Deploying version ${params.VERSION}"
             }
