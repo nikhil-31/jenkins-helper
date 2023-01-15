@@ -13,10 +13,21 @@ pipeline {
         SERVER_CREDENTIALS = credentials('dockerhub')
     }
     stages {
+        stage("init") {
+            steps {
+                script {
+                    gv = load "echo.groovy"
+                }
+            }
+        }
+
         stage("Build Image") {
             steps {
                 echo "Building the damn image"
                 sh "${SERVER_CREDENTIALS}"
+                script {
+                    gv.build_app()
+                }
             }
         }
         stage("Test image") {
@@ -39,6 +50,10 @@ pipeline {
                 }
                 echo "Deploying version ${params.VERSION}"
             }
+        }
+
+        stage("groovy script"){
+
         }
     }
     post {
